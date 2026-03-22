@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": ["/tmp/az-site/serve.py"],
+      "port": 8080
+    },
+    {
+      "name": "vantage",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": ["/tmp/vantage-serve.py"],
+      "port": 8081
+    }
+  ]
+}

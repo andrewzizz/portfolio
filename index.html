@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew Zizzadoro</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #111113;
+  --text: #c8c8c4;
+  --text-dim: #5a5a58;
+  --accent: #8a9a78;
+  --link: #7a9aba;
+  --border: #222224;
+}
+[data-theme="light"] {
+  --bg: #f8f7f5;
+  --text: #3a3a38;
+  --text-dim: #a0a09a;
+  --accent: #5a7048;
+  --link: #4a7090;
+  --border: #e4e2de;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  transition: background 0.4s, color 0.4s;
+}
+
+.page {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 6rem 2rem 4rem;
+}
+
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  font-size: 12px;
+}
+.nav-left { color: var(--text-dim); }
+.theme-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.theme-btn:hover { color: var(--text); }
+
+/* Header */
+.header {
+  margin-bottom: 4rem;
+}
+.name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.bio {
+  color: var(--text-dim);
+  font-size: 13px;
+  max-width: 380px;
+}
+.bio a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.bio a:hover { color: var(--text); }
+
+/* Separator */
+.sep {
+  width: 20px;
+  height: 1px;
+  background: var(--border);
+  margin: 3rem 0;
+}
+
+/* Projects */
+.project {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  text-decoration: none;
+  color: inherit;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-left 0.3s;
+}
+.project:first-child { border-top: 1px solid var(--border); }
+.project:hover { padding-left: 6px; }
+.project-info { flex: 1; min-width: 0; }
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.3rem;
+}
+.project-name {
+  font-weight: 400;
+  font-size: 14px;
+}
+.project-type {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.project-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.project-arrow {
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-left: 0.4rem;
+}
+.project:hover .project-arrow { opacity: 1; }
+
+/* Project Preview Thumbnail */
+.project-preview {
+  flex-shrink: 0;
+  width: 120px;
+  height: 72px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.project:hover .project-preview { opacity: 1; }
+.preview-vantage {
+  width: 100%;
+  height: 100%;
+  background: #0a0e14;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.pv-bar { display: flex; gap: 3px; }
+.pv-card {
+  flex: 1;
+  height: 14px;
+  background: #0f1318;
+  border-top: 1px solid #ff9000;
+  padding: 2px 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pv-label { font-size: 3px; color: #3e4a58; font-family: sans-serif; line-height: 1; }
+.pv-num { font-size: 5px; color: #c8d4e0; font-family: monospace; font-weight: 700; line-height: 1; }
+.pv-tabs { display: flex; gap: 2px; }
+.pv-tab {
+  font-size: 3px;
+  color: #3e4a58;
+  font-family: monospace;
+  padding: 1px 3px;
+  background: #070a0f;
+}
+.pv-tab.active { color: #ff9000; border-bottom: 1px solid #ff9000; background: #0f1318; }
+.pv-chart {
+  flex: 1;
+  background: #0f1318;
+  position: relative;
+  overflow: hidden;
+}
+.pv-chart svg { width: 100%; height: 100%; }
+@media(max-width:500px) { .project-preview { display: none; } }
+
+/* Footer */
+.footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  gap: 1.2rem;
+}
+.footer a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-left">az</span>
+  <button class="theme-btn" onclick="toggleTheme()">light</button>
+</nav>
+
+<div class="page">
+  <div class="header">
+    <h1 class="name">Andrew Zizzadoro</h1>
+  </div>
+
+  <a href="https://vantage-terminal.netlify.app" target="_blank" class="project">
+    <div class="project-info">
+      <div class="project-top">
+        <span class="project-name">Vantage<span class="project-arrow">&rarr;</span></span>
+        <span class="project-type">web app</span>
+      </div>
+      <p class="project-desc">Bloomberg-style stock portfolio terminal with live market data.</p>
+    </div>
+    <div class="project-preview">
+      <div class="preview-vantage">
+        <div class="pv-bar">
+          <div class="pv-card"><div class="pv-label">S&P 500</div><div class="pv-num">$648</div></div>
+          <div class="pv-card"><div class="pv-label">NASDAQ</div><div class="pv-num">$582</div></div>
+          <div class="pv-card"><div class="pv-label">DOW</div><div class="pv-num">$455</div></div>
+        </div>
+        <div class="pv-tabs">
+          <div class="pv-tab active">AAPL</div>
+          <div class="pv-tab">TSLA</div>
+          <div class="pv-tab">NVDA</div>
+        </div>
+        <div class="pv-chart">
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <polyline points="0,28 8,25 16,22 24,24 32,18 40,20 48,15 56,12 64,14 72,10 80,8 88,11 96,6 100,7" fill="none" stroke="#00cc66" stroke-width="1" opacity="0.7"/>
+            <polygon points="0,28 8,25 16,22 24,24 32,18 40,20 48,15 56,12 64,14 72,10 80,8 88,11 96,6 100,7 100,30 0,30" fill="#00cc66" opacity="0.08"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <div class="footer">
+    <a href="#">linkedin</a>
+    <a href="#">github</a>
+  </div>
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.querySelector('.theme-btn');
+  if (html.getAttribute('data-theme') === 'light') {
+    html.removeAttribute('data-theme');
+    btn.textContent = 'light';
+  } else {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = 'dark';
+  }
+}
+</script>
+</body>
+</html>

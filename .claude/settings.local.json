@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:michaelzizzadoro.com)",
+      "Bash(npx --version)",
+      "Bash(open /Users/andrewzizzadoro/Documents/Claude/Andrew.Zizzadoro/index.html)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__mcp-registry__search_mcp_registry",
+      "WebSearch",
+      "Read(//usr/local/bin/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//tmp/**)",
+      "Bash(mkdir -p /tmp/az-site)",
+      "Bash(cp /Users/andrewzizzadoro/Documents/Claude/Andrew.Zizzadoro/index.html /tmp/az-site/)",
+      "Bash(ls -1 /Users/andrewzizzadoro/Documents/Claude/Andrew.Zizzadoro/*.html)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}
